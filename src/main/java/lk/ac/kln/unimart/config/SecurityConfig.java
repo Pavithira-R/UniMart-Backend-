@@ -25,6 +25,11 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
+    public org.springframework.security.crypto.password.PasswordEncoder passwordEncoder() {
+        return new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder();
+    }
+
+    @Bean
     public SecretKey jwtSecretKey(@Value("${app.security.jwt-secret}") String value) {
         byte[] decoded = Base64.getDecoder().decode(value);
         if (decoded.length < 32) {
