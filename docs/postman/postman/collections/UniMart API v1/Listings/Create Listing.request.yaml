@@ -1,0 +1,17 @@
+$kind: http-request
+url: "{{base_url}}/listings"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "title": "Vite and React Web Development",
+      "description": "Fully comprehensive course textbook in great condition.",
+      "price": 1250.00,
+      "categoryId": 1
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
+order: 3000

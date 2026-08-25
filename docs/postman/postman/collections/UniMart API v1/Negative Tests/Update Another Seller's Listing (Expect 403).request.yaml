@@ -1,0 +1,19 @@
+$kind: http-request
+name: Update Another Seller's Listing (Expect 403)
+url: "{{base_url}}/listings/1"
+method: PUT
+body:
+  type: json
+  content: |-
+    {
+      "title": "Hacked Book",
+      "description": "Updating another user's book.",
+      "price": 5.00,
+      "status": "AVAILABLE",
+      "categoryId": 1
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
+order: 3000

@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{base_url}}/reviews/1"
+method: DELETE
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
+order: 4000

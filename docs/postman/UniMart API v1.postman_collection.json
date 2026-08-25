@@ -1,0 +1,653 @@
+{
+  "info": {
+    "_postman_id": "893c52a0-4ff6-42bb-ae4b-74d1257fe1fa",
+    "name": "UniMart API v1",
+    "description": "Postman API Collection for UniMart Lab Project, covering Guide 07 requirements.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.accessToken) {",
+                  "    pm.environment.set(\"access_token\", jsonData.accessToken);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"universityEmail\": \"student@kln.ac.lk\",\n  \"password\": \"password123\",\n  \"fullName\": \"John Doe\",\n  \"role\": \"USER\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/register",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.accessToken) {",
+                  "    pm.environment.set(\"access_token\", jsonData.accessToken);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"universityEmail\": \"student@kln.ac.lk\",\n  \"password\": \"password123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Listings",
+      "item": [
+        {
+          "name": "Get Listings (Public)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/listings?page=0&size=10&status=AVAILABLE",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "listings"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "q",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "categoryId",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "status",
+                  "value": "AVAILABLE"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Listing by ID (Public)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/listings/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "listings",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Listing",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Vite and React Web Development\",\n  \"description\": \"Fully comprehensive course textbook in great condition.\",\n  \"price\": 1250.00,\n  \"categoryId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/listings",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "listings"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Listing",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Vite and React Web Development (Updated)\",\n  \"description\": \"Book has minor cover creases, otherwise clean pages.\",\n  \"price\": 1100.00,\n  \"status\": \"AVAILABLE\",\n  \"categoryId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/listings/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "listings",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Listing (Archive)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/listings/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "listings",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Reviews",
+      "item": [
+        {
+          "name": "Get Listing Reviews (Public)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/listings/1/reviews",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "listings",
+                "1",
+                "reviews"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Review",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderId\": 1,\n  \"rating\": 5,\n  \"comment\": \"Excellent service, book was delivered fast and looks exactly like the photos.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/reviews",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "reviews"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Review",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rating\": 4,\n  \"comment\": \"Nice service, though delivery was delayed by a day.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/reviews/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "reviews",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Review",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/reviews/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "reviews",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Negative Tests",
+      "item": [
+        {
+          "name": "Create Listing Without Token (Expect 401)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Unauthorized Book\",\n  \"description\": \"Should not succeed.\",\n  \"price\": 100.00,\n  \"categoryId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/listings",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "listings"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Blank Title (Expect 400)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"\",\n  \"description\": \"Blank title test\",\n  \"price\": 10.00,\n  \"categoryId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/listings",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "listings"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Another Seller's Listing (Expect 403)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Hacked Book\",\n  \"description\": \"Updating another user's book.\",\n  \"price\": 5.00,\n  \"status\": \"AVAILABLE\",\n  \"categoryId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/listings/999",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "listings",
+                "999"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Missing Listing (Expect 404)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/listings/9999",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "listings",
+                "9999"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Review Non-Completed Order (Expect 409)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderId\": 2,\n  \"rating\": 5,\n  \"comment\": \"Review order that is pending/cancelled\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/reviews",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "reviews"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Review Another Buyer's Order (Expect 403)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderId\": 3,\n  \"rating\": 5,\n  \"comment\": \"Hacking review onto another buyer's order\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/reviews",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "reviews"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Rating Outside 1-5 (Expect 400)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderId\": 1,\n  \"rating\": 6,\n  \"comment\": \"Invalid rating value\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/reviews",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "reviews"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Expired/Malformed JWT (Expect 401)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "invalid-token-string",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Unreachable Book\",\n  \"description\": \"Fails token checks.\",\n  \"price\": 10.00,\n  \"categoryId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/listings",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "listings"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

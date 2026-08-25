@@ -1,0 +1,13 @@
+# Use this workspace to collaborate
+workspace:
+  id: f9e45a1e-10f7-48c7-8f3c-0d538f02bcf3
+
+localResources:
+  collections:
+    - ../UniMart API v1.postman_collection.json
+  environments:
+    - ../UniMart Local.postman_environment.json
+
+cloudResources:
+  collections:
+    ../postman/collections/UniMart API v1: 43728e53-a3a8-4e3e-bf1f-3c4fe845c329

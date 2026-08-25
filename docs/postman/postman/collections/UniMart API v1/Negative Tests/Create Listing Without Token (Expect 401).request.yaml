@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{base_url}}/listings"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "title": "Unauthorized Book",
+      "description": "Should not succeed.",
+      "price": 100.00,
+      "categoryId": 1
+    }
+order: 1000

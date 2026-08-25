@@ -1,0 +1,18 @@
+$kind: http-request
+url: "{{base_url}}/listings/1"
+method: PUT
+body:
+  type: json
+  content: |-
+    {
+      "title": "Vite and React Web Development (Updated)",
+      "description": "Book has minor cover creases, otherwise clean pages.",
+      "price": 1100.00,
+      "status": "AVAILABLE",
+      "categoryId": 1
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
+order: 4000

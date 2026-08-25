@@ -1,0 +1,19 @@
+$kind: http-request
+url: "{{base_url}}/auth/login"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "universityEmail": "student@kln.ac.lk",
+      "password": "password123"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      var jsonData = pm.response.json();
+      if (jsonData.accessToken) {
+          pm.environment.set("access_token", jsonData.accessToken);
+      }
+    language: text/javascript
+order: 2000

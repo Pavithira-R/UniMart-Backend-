@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{base_url}}/reviews/1"
+method: PUT
+body:
+  type: json
+  content: |-
+    {
+      "rating": 4,
+      "comment": "Nice service, though delivery was delayed by a day."
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
+order: 3000

@@ -1,0 +1,16 @@
+$kind: http-request
+url: "{{base_url}}/reviews"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "orderId": 3,
+      "rating": 5,
+      "comment": "Hacking review onto another buyer's order"
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
+order: 6000
